@@ -1,0 +1,30 @@
+---
+import BarChart from "./bar-chart.astro";
+import DataTable from "./data-table.astro";
+import Text from "./text.astro";
+import type { Section } from "./content";
+import styles from "./bench-section.module.css";
+
+interface Props {
+  section: Section;
+  number: number;
+}
+
+const { section, number } = Astro.props;
+---
+
+<section class={styles.root} aria-labelledby={section.id}>
+  <div class={styles.head}>
+    <span class={styles.label}>{String(number).padStart(2, "0")} / {section.label}</span>
+    <h2 id={section.id} class={styles.title}>{section.title}</h2>
+    <p class={styles.lead}><Text text={section.lead} /></p>
+    <p class={styles.verdict}><span class={styles.verdictKey}>Result</span> <Text text={section.verdict} /></p>
+  </div>
+  <div class={styles.body}>
+    {section.chart && <BarChart {...section.chart} />}
+    <DataTable table={section.table} />
+  </div>
+  <ul class={styles.notes}>
+    {section.notes.map((note) => <li><Text text={note} /></li>)}
+  </ul>
+</section>

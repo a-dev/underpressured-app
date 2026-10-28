@@ -1,0 +1,21 @@
+---
+import Page from "../layouts/page.astro";
+import styles from "./not-found.module.css";
+---
+
+<Page
+  title="Underpressured, page not found"
+  description="The link may be out of date, or the address may be incorrect. Return to the homepage to read about Underpressured and its benchmarks."
+  indexable={false}
+>
+  <div class={styles.column}>
+    <h1 class={styles.title}>This page isn't here.</h1>
+    <p class={styles.text}>
+      The link may be out of date, or the address may be incorrect. Return to the homepage to read about Underpressured and its benchmarks.
+    </p>
+    <nav class={styles.links} aria-label="Page not found">
+      <a class={styles.action} href="/">Back to Underpressured</a>
+      <a class={styles.action} href="/support/">Contact support</a>
+    </nav>
+  </div>
+</Page>

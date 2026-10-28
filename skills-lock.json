@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "css-modules": {
+      "source": "a-dev/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend/css-modules/SKILL.md",
+      "computedHash": "ddfda9f78c97a03b08e84c0eb8cdf0124a63ca4ca14128c6136c2d77bae47925"
+    },
+    "css-modules-setup": {
+      "source": "a-dev/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend/css-modules-setup/SKILL.md",
+      "computedHash": "c73a3c90bcb816fc0ab75b0855523fc3f472e261acaac46d645ad7b6d267f904"
+    }
+  }
+}

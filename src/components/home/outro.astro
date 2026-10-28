@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import styles from "./outro.module.css";
+
+type Props = HTMLAttributes<"p">;
+
+const { class: className, ...attrs } = Astro.props;
+---
+
+<p class:list={[styles.root, className]} {...attrs}>
+  That's it. Easy as <button type="button" class={styles.censored} data-outro-toggle aria-pressed="false">fuck</button>. Just works.
+</p>
+
+<script>
+  for (const button of document.querySelectorAll<HTMLButtonElement>("[data-outro-toggle]")) {
+    button.addEventListener("click", () => {
+      button.setAttribute("aria-pressed", String(button.getAttribute("aria-pressed") !== "true"));
+    });
+  }
+</script>

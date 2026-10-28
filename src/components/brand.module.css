@@ -1,0 +1,41 @@
+@layer ui {
+  .root {
+    --_size: min(24cqi, 16rem);
+
+    container-type: inline-size;
+    display: flex;
+    gap: 3.5rem;
+    align-items: start;
+    justify-content: space-between;
+  }
+
+  .logo {
+    flex-shrink: 0;
+    inline-size: var(--_size);
+  }
+
+  .slogan {
+    position: relative;
+    min-inline-size: 0;
+  }
+
+  /* Slogan glyphs are 2.03em tall, from first cap top to last baseline.
+     The cap top is 0.068em below the box. */
+  .root .slogan {
+    margin-block-start: -0.068em;
+    font-size: calc(var(--_size) / 2.03);
+  }
+
+  @media (width <= 48rem) {
+    .root {
+      --_size: 28cqi;
+
+      gap: 0;
+      align-items: center;
+    }
+
+    .slogan {
+      margin-inline-start: -6cqi;
+    }
+  }
+}

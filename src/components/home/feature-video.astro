@@ -1,0 +1,30 @@
+---
+import styles from "./feature-video.module.css";
+
+interface Props {
+  id: string;
+  description: string;
+  src: string;
+  poster: string;
+}
+
+const { id, description, src, poster } = Astro.props;
+---
+
+<figure class={styles.root}>
+  <video
+    class={styles.player}
+    controls
+    playsinline
+    {...{ loading: "lazy" }}
+    preload="none"
+    width="1920"
+    height="1200"
+    poster={poster}
+    aria-labelledby={`${id}-video-caption`}
+  >
+    <source src={src} type="video/mp4" />
+    <a href={src} download>Download this demonstration video</a>.
+  </video>
+  <figcaption id={`${id}-video-caption`} class={styles.caption}>{description}</figcaption>
+</figure>

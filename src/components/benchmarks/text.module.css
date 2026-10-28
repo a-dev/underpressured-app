@@ -1,0 +1,6 @@
+@layer ui {
+  .link {
+    font-weight: 600;
+    color: var(--color-fg-primary);
+  }
+}

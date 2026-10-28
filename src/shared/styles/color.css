@@ -1,0 +1,15 @@
+@layer base {
+  :root {
+    --color-bg-canvas: var(--palette-white-50);
+    --color-bg-surface: var(--palette-orange-100);
+    --color-bg-subtle: var(--palette-purple-100);
+    --color-fg-primary: var(--palette-purple-800);
+    --color-fg-muted: color-mix(in srgb, var(--palette-purple-800) 76%, var(--palette-white-50));
+    --color-fg-on-accent: var(--palette-white-50);
+    --color-border-subtle: color-mix(in srgb, var(--palette-purple-800) 15%, transparent);
+    --color-border-strong: var(--palette-purple-800);
+    --color-accent-primary: var(--palette-red-400);
+    --color-accent-secondary: var(--palette-red-300);
+    --color-accent-highlight: var(--palette-purple-100);
+  }
+}

@@ -1,0 +1,18 @@
+---
+import Logo from "./logo.astro";
+import Slogan from "./slogan.astro";
+import styles from "./brand.module.css";
+
+interface Props {
+  sloganAs?: "h1" | "p";
+  sloganId?: string;
+  class?: string;
+}
+
+const { sloganAs, sloganId, class: className } = Astro.props;
+---
+
+<div class:list={[styles.root, className]}>
+  <Logo class={styles.logo} />
+  <Slogan class={styles.slogan} as={sloganAs} id={sloganId} />
+</div>

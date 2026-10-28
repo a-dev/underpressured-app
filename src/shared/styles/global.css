@@ -1,0 +1,144 @@
+@layer reset, base, atoms, ui;
+
+@import url("./palette.css");
+@import url("./color.css");
+
+@property --scroll-progress {
+  inherits: true;
+  initial-value: 0;
+  syntax: "<number>";
+}
+
+@property --squish-progress {
+  inherits: true;
+  initial-value: 0;
+  syntax: "<number>";
+}
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  img,
+  svg {
+    display: block;
+    max-inline-size: 100%;
+  }
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    color: var(--color-fg-primary);
+    text-rendering: optimizelegibility;
+
+    background-color: var(--color-bg-canvas);
+
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :root {
+    --font-display: var(--font-cherry-bomb-one), cursive;
+    --font-sans: -apple-system, blinkmacsystemfont, "Helvetica Neue", helvetica, arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", menlo, monospace;
+    --site-header-max-width: 1177px;
+    --site-header-gutter: 24px;
+    --site-header-font-size: calc(
+      (min(100vw, var(--site-header-max-width)) - 2 * var(--site-header-gutter)) / 9.8
+    );
+    --site-header-stretch: 1;
+
+    /* Full header height, for page offset and anchor targets. */
+    --site-header-full-height: calc(
+      var(--site-header-font-size) * 0.9 * var(--site-header-stretch) + 16px
+    );
+    --spring-easing: linear(
+      0,
+      0.65 6%,
+      1.28 14%,
+      1.62 22%,
+      1.32 31%,
+      0.86 44%,
+      0.78 51%,
+      1.06 66%,
+      1.09 73%,
+      0.97 86%,
+      1
+    );
+  }
+
+  body {
+    --squish-progress: clamp(0, var(--scroll-progress), 1);
+
+    min-block-size: 100dvh;
+    color: var(--color-fg-primary);
+    background-color: var(--color-fg-primary);
+    transition: --squish-progress 480ms var(--spring-easing);
+  }
+
+  @media (width <= 48rem) {
+    :root {
+      --site-header-gutter: 0px;
+      --site-header-stretch: 2;
+    }
+  }
+
+  /* Without scroll timelines, a 0s animation stops on its `to` keyframe. */
+  @supports (animation-timeline: scroll()) {
+    /* Use longhands. Minifiers and Safari drop a timeline in the shorthand. */
+    :root {
+      animation-name: track-scroll-progress, overscroll-bounce-bg;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root block);
+      animation-range: 0% 100%;
+    }
+
+    body {
+      animation-name: overscroll-bounce-bg;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root block);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    /* Keep the overscroll color. Stop only the header animation. */
+    :root {
+      animation-name: overscroll-bounce-bg;
+    }
+
+    body {
+      --squish-progress: 0;
+
+      transition: none;
+    }
+  }
+
+  @keyframes track-scroll-progress {
+    from {
+      --scroll-progress: 0;
+    }
+
+    to {
+      --scroll-progress: 1;
+    }
+  }
+
+  /* Overscroll area color: canvas at the top, footer color at the bottom. */
+  @keyframes overscroll-bounce-bg {
+    from {
+      background-color: var(--color-bg-canvas);
+    }
+
+    to {
+      background-color: var(--color-fg-primary);
+    }
+  }
+}

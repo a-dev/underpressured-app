@@ -1,0 +1,37 @@
+---
+import type { Bar } from "./content";
+import Text from "./text.astro";
+import styles from "./bar-chart.module.css";
+
+interface Props {
+  title: string;
+  note: string;
+  max: number;
+  bars: readonly Bar[];
+}
+
+const { title, note, max, bars } = Astro.props;
+---
+
+<figure class={styles.root}>
+  <figcaption class={styles.caption}>
+    <span class={styles.title}><Text text={title} /></span>
+    <span class={styles.note}><Text text={note} /></span>
+  </figcaption>
+  <ul class={styles.list}>
+    {
+      bars.map((bar) => (
+        <li class={styles.row}>
+          <span class={styles.label}>{bar.label}</span>
+          <span class={styles.value}>{bar.display}</span>
+          <span class={styles.track} aria-hidden="true">
+            <span
+              class:list={[styles.bar, bar.pick && styles.barPick]}
+              style={{ "--_value": `${(bar.value / max) * 100}%` }}
+            />
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+</figure>

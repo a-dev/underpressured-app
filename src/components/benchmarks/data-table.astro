@@ -1,0 +1,85 @@
+---
+import type { Table } from "./content";
+import Text from "./text.astro";
+import styles from "./data-table.module.css";
+
+interface Props {
+  table: Table;
+}
+
+const { caption, columns, rows, pickRow } = Astro.props.table;
+---
+
+<div class={styles.root}>
+  <div
+    class={styles.scroller}
+    data-table-scroller
+    tabindex="0"
+  >
+  <table class={styles.table}>
+    <caption class={styles.caption}><Text text={caption} /></caption>
+    <thead>
+      <tr>
+        {columns.map((column) => <th scope="col" class={styles.head}>{column}</th>)}
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((row, index) => (
+          <tr class:list={[index === pickRow && styles.pick]}>
+            {row.map((cell, column) =>
+              column === 0 ? (
+                <th scope="row" class={styles.rowHead}>
+                  {cell}
+                </th>
+              ) : (
+                <td class={styles.cell}><Text text={cell} /></td>
+              ),
+            )}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<script>
+  const scrollers = document.querySelectorAll<HTMLElement>("[data-table-scroller]");
+
+  const updateFocusability = (scroller: HTMLElement) => {
+    const isScrollable = scroller.scrollWidth > scroller.clientWidth;
+
+    if (isScrollable) {
+      const label = scroller.querySelector("caption")?.textContent?.trim();
+      scroller.tabIndex = 0;
+      scroller.setAttribute("role", "region");
+      if (label) {
+        scroller.setAttribute("aria-label", label);
+      }
+    } else {
+      scroller.removeAttribute("tabindex");
+      scroller.removeAttribute("role");
+      scroller.removeAttribute("aria-label");
+    }
+  };
+
+  const resizeObserver = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.target instanceof HTMLElement) {
+        updateFocusability(entry.target);
+      }
+    }
+  });
+
+  for (const scroller of scrollers) {
+    updateFocusability(scroller);
+    resizeObserver.observe(scroller);
+  }
+
+  document.fonts.ready.then(() => {
+    for (const scroller of scrollers) {
+      updateFocusability(scroller);
+    }
+  });
+</script>

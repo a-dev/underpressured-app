@@ -1,0 +1,10 @@
+@layer base {
+  :root {
+    --palette-white-50: #fff9f2;
+    --palette-orange-100: #ffe8cc;
+    --palette-red-300: #ffa68c;
+    --palette-red-400: #ff7e6b;
+    --palette-purple-100: #eae5ff;
+    --palette-purple-800: #462e54;
+  }
+}

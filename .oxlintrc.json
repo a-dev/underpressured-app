@@ -1,0 +1,150 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": ["**/*.d.ts", ".claude/**", ".agents/**"],
+  "plugins": ["typescript", "unicorn", "oxc", "import", "vitest"],
+  "jsPlugins": [
+    {
+      "name": "sonarjs",
+      "specifier": "eslint-plugin-sonarjs"
+    }
+  ],
+  "categories": {
+    "correctness": "error"
+  },
+  "rules": {
+    "import/first": "error",
+    // Vitest rules.
+    "vitest/no-focused-tests": "error",
+    "vitest/no-disabled-tests": "error",
+    "vitest/no-identical-title": "error",
+    "vitest/valid-title": "error",
+    "vitest/valid-describe-callback": "error",
+    "vitest/expect-expect": "error",
+    "vitest/prefer-hooks-on-top": "error",
+    // SonarJS rules
+    // Pruned to what a static, backend-less site can actually hit. Dropped
+    // wholesale, 48 rules: AWS and cloud infrastructure; HTTP server, headers
+    // and sessions; auth, transport crypto and key material; other frameworks
+    // and XML parsers; Node server runtime; Mocha and Chai idioms. This site has
+    // no server, no session, no auth and no cloud resources, so those could
+    // only ever be dead weight in the report.
+    // Deliberately kept despite the same reasoning: no-hardcoded-secrets and
+    // hardcoded-secret-signatures (a CI token can still land in scripts/ or a
+    // workflow on a public repo), publicly-writable-directories (scripts/ do
+    // build temp dirs, and mkdtempSync under tmpdir() is the pattern it
+    // enforces), and file-permissions (scripts/ write files).
+    "sonarjs/class-name": "error",
+    "sonarjs/no-fallthrough": "error",
+    "sonarjs/no-equals-in-for-termination": "error",
+    "sonarjs/no-extra-arguments": "error",
+    "sonarjs/no-labels": "error",
+    "sonarjs/no-nested-assignment": "error",
+    "sonarjs/no-redundant-boolean": "error",
+    "sonarjs/prefer-single-boolean-return": "error",
+    "sonarjs/fixme-tag": "error",
+    "sonarjs/todo-tag": "error",
+    "sonarjs/no-case-label-in-switch": "error",
+    "sonarjs/no-parameter-reassignment": "error",
+    "sonarjs/no-floating-point-equality": "error",
+    "sonarjs/prefer-while": "error",
+    "sonarjs/label-position": "error",
+    "sonarjs/public-static-readonly": "error",
+    "sonarjs/call-argument-line": "error",
+    "sonarjs/max-switch-cases": "error",
+    "sonarjs/no-unused-vars": "error",
+    "sonarjs/function-inside-loop": "error",
+    "sonarjs/code-eval": "error",
+    "sonarjs/future-reserved-words": "error",
+    "sonarjs/no-primitive-wrappers": "error",
+    "sonarjs/no-identical-expressions": "error",
+    "sonarjs/constructor-for-side-effects": "error",
+    "sonarjs/no-dead-store": "error",
+    "sonarjs/no-identical-conditions": "error",
+    "sonarjs/no-duplicated-branches": "error",
+    "sonarjs/no-inverted-boolean-check": "error",
+    "sonarjs/misplaced-loop-counter": "error",
+    "sonarjs/no-nested-functions": "error",
+    "sonarjs/no-useless-increment": "error",
+    "sonarjs/no-globals-shadowing": "error",
+    "sonarjs/no-empty-test-file": "error",
+    "sonarjs/pseudo-random": "error",
+    "sonarjs/for-loop-increment-sign": "error",
+    "sonarjs/updated-loop-counter": "error",
+    "sonarjs/block-scoped-var": "error",
+    "sonarjs/no-ignored-exceptions": "error",
+    "sonarjs/no-gratuitous-expressions": "error",
+    "sonarjs/file-permissions": "error",
+    "sonarjs/no-unenclosed-multiline-block": "error",
+    "sonarjs/no-implicit-global": "error",
+    "sonarjs/no-useless-catch": "error",
+    "sonarjs/non-existent-operator": "error",
+    "sonarjs/no-fixed-wait-in-tests": "error",
+    "sonarjs/no-incomplete-assertions": "error",
+    "sonarjs/no-global-this": "error",
+    "sonarjs/no-delete-var": "error",
+    "sonarjs/no-nested-conditional": "error",
+    "sonarjs/inverted-assertion-arguments": "error",
+    "sonarjs/updated-const-var": "error",
+    "sonarjs/no-invariant-returns": "error",
+    "sonarjs/generator-without-yield": "error",
+    "sonarjs/comma-or-logical-or-case": "error",
+    "sonarjs/no-redundant-jump": "error",
+    "sonarjs/inconsistent-function-call": "error",
+    "sonarjs/no-use-of-empty-return-value": "error",
+    "sonarjs/cognitive-complexity": "error",
+    "sonarjs/no-all-duplicated-branches": "error",
+    "sonarjs/no-same-line-conditional": "error",
+    "sonarjs/no-unthrown-error": "error",
+    "sonarjs/no-unused-collection": "error",
+    // A Sonar *hotspot* rather than a defect check: it fires on any command
+    // resolved through PATH, and the only thing that silences it is an absolute
+    // interpreter path, which is not portable (/usr/bin vs Homebrew vs CI
+    // images). Every child process here is build or test tooling running git,
+    // node, or bun through execFileSync/spawnSync with a literal argv array and
+    // no shell. Left listed rather than deleted, so re-generating the syntactic
+    // rule set does not quietly switch it back on.
+    "sonarjs/no-os-command-from-path": "off",
+    "sonarjs/no-element-overwrite": "error",
+    "sonarjs/no-identical-functions": "error",
+    "sonarjs/no-empty-collection": "error",
+    "sonarjs/no-redundant-assignments": "error",
+    "sonarjs/prefer-type-guard": "error",
+    "sonarjs/use-type-alias": "error",
+    "sonarjs/production-debug": "error",
+    "sonarjs/prefer-default-last": "error",
+    "sonarjs/no-duplicate-in-composite": "error",
+    "sonarjs/no-nested-template-literals": "error",
+    "sonarjs/prefer-promise-shorthand": "error",
+    "sonarjs/link-with-target-blank": "error",
+    "sonarjs/table-header": "error",
+    "sonarjs/no-table-as-layout": "error",
+    "sonarjs/table-header-reference": "error",
+    "sonarjs/object-alt-content": "error",
+    "sonarjs/publicly-writable-directories": "error",
+    "sonarjs/no-same-argument-assert": "error",
+    "sonarjs/prefer-specific-assertions": "error",
+    "sonarjs/no-trivial-assertions": "error",
+    "sonarjs/test-check-exception": "error",
+    "sonarjs/stable-tests": "error",
+    "sonarjs/parameterized-tests": "error",
+    "sonarjs/stateful-regex": "error",
+    "sonarjs/no-hardcoded-secrets": "error",
+    "sonarjs/hardcoded-secret-signatures": "error",
+    "sonarjs/redundant-type-aliases": "error",
+    "sonarjs/no-internal-api-use": "error",
+    "sonarjs/no-literal-call": "error",
+    "sonarjs/dynamically-constructed-templates": "error",
+    "sonarjs/async-test-assertions": "error",
+    "sonarjs/no-forced-browser-interaction": "error",
+    "sonarjs/super-linear-regex": "error",
+    "sonarjs/prefer-native-lodash-alternative": "error",
+    "sonarjs/no-default-utility-imports": "error",
+    "sonarjs/memoize-cache-key": "error",
+    "sonarjs/no-debug-commands-in-ui-tests": "error",
+    "sonarjs/no-interpolation-in-inline-snapshots": "error",
+    "sonarjs/explicit-test-skip": "error"
+  },
+  "env": {
+    "builtin": true
+  }
+}

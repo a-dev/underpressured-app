@@ -1,0 +1,105 @@
+@layer ui {
+  .root {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: flex-start;
+
+    inline-size: 100%;
+  }
+
+  .text {
+    max-inline-size: 57ch;
+    margin-block-start: 1rem;
+
+    font-size: clamp(1.125rem, 1.8vw, 1.3125rem);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    align-items: center;
+
+    margin-block-start: 0.5rem;
+  }
+
+  .downloads {
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+
+  .download-links {
+    display: flex;
+    grid-area: 1 / 1;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+
+    opacity: 0.35;
+    filter: blur(1px);
+  }
+
+  .coming-soon {
+    position: relative;
+    z-index: 1;
+
+    grid-area: 1 / 1;
+
+    padding: 0.375rem 0.875rem;
+    border: 1px solid var(--color-fg-primary);
+    border-radius: 999px;
+
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-fg-on-accent);
+
+    background-color: var(--color-fg-primary);
+  }
+
+  .app-store {
+    display: inline-flex;
+    border-radius: 0.5rem;
+  }
+
+  .app-store-badge {
+    inline-size: auto;
+    block-size: 2.75rem;
+  }
+
+  .github {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    block-size: 2.75rem;
+    padding-inline: 1.125rem;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 0.5rem;
+
+    font-weight: 600;
+    color: var(--color-fg-primary);
+    text-decoration: none;
+
+    background-color: var(--color-bg-surface);
+
+    transition: background-color 150ms ease;
+  }
+
+  .github:hover {
+    background-color: var(--color-bg-subtle);
+  }
+
+  .github-mark {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    fill: currentcolor;
+  }
+
+  .requirements {
+    font-size: 0.875rem;
+    color: var(--color-fg-muted);
+  }
+}

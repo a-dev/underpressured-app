@@ -1,0 +1,7 @@
+@layer ui {
+  .root {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+  }
+}

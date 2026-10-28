@@ -1,0 +1,94 @@
+---
+import Page from "../layouts/page.astro";
+import Brand from "../components/brand.astro";
+import BenchSection from "../components/benchmarks/bench-section.astro";
+import DataTable from "../components/benchmarks/data-table.astro";
+import Text from "../components/benchmarks/text.astro";
+import {
+  caveats,
+  intro,
+  sections,
+  setup,
+  stats,
+  tools,
+} from "../components/benchmarks/content";
+import styles from "./benchmarks.module.css";
+---
+
+<Page
+  title="Underpressured image compression benchmarks"
+  description="Compare image compression and resizing in Underpressured. Read the file sizes, quality scores, processing times, test conditions, and limits."
+  socialTitle="How Underpressured's image processing compares"
+  socialDescription="Compare JPEG and PNG compression, linear-light resizing, and batch processing results. Read how the tests work and where their results apply."
+>
+  <Brand class={styles.brand} />
+
+  <div class={styles.column}>
+  <section class={styles.hero} aria-labelledby="benchmarks-title">
+    <h1 id="benchmarks-title" class={styles.title}>Benchmarks</h1>
+    <p class={styles.intro}><Text text={intro} /></p>
+    <dl class={styles.stats}>
+      {
+        stats.map((stat) => (
+          <div class={styles.stat}>
+            <dt class={styles.statLabel}><Text text={stat.label} /></dt>
+            <dd class={styles.statValue}>{stat.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <nav class={styles.tocNav} aria-label="Benchmarks">
+    <ol class={styles.toc}>
+      {
+        sections.map((section) => {
+          const [name, kind] = section.label.split(", ");
+          return (
+            <li class={styles.tocItem}>
+              <a class={styles.tocLink} href={`#${section.id}`}>
+                {name}
+                {kind && <span class={styles.tocKind}>{kind}</span>}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ol>
+  </nav>
+
+  <dl class={styles.setup}>
+    {
+      setup.map((item) => (
+        <div class={styles.setupItem}>
+          <dt class={styles.setupTerm}>{item.term}</dt>
+          <dd class={styles.setupText}><Text text={item.text} /></dd>
+        </div>
+      ))
+    }
+  </dl>
+
+  {
+    sections.map((section, index) => (
+      <BenchSection section={section} number={index + 1} />
+    ))
+  }
+
+  <section class={styles.method} aria-labelledby="method">
+    <h2 id="method" class={styles.methodTitle}>Method and limits</h2>
+    <div class={styles.methodBody}>
+      <DataTable table={tools} />
+      <div class={styles.methodText}>
+        <ul class={styles.caveats}>
+          {caveats.map((caveat) => <li><Text text={caveat} /></li>)}
+        </ul>
+        <p>The benchmark scripts, source images, and full results are not public yet.</p>
+      </div>
+    </div>
+  </section>
+
+  <a class={styles.back} href="/">
+    &larr; Back to Underpressured overview
+  </a>
+  </div>
+</Page>

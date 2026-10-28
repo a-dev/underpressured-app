@@ -1,0 +1,328 @@
+import assert from "node:assert/strict";
+import { execFile } from "node:child_process";
+import { mkdtemp, mkdir, realpath, rm, writeFile } from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
+import { promisify } from "node:util";
+import test from "node:test";
+
+const execFileAsync = promisify(execFile);
+const runner = new URL("../scripts/check-oxlint.mjs", import.meta.url);
+
+async function write(root, relativePath, contents) {
+  const filePath = path.join(root, relativePath);
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, contents);
+}
+
+function profile(overrides = {}) {
+  return {
+    methodologyVersion: "1.0.0",
+    profileSchemaVersion: 1,
+    adapter: { name: "vite-react", version: "1.0.0" },
+    appRoot: "src",
+    stylesRoot: "src/styles",
+    globalStylesheet: "src/styles/global.css",
+    alias: { bare: "#styles", subpath: "#styles/*" },
+    helpers: { classNames: "mergeClasses", cssVariables: "styleVariables" },
+    sharedApi: {
+      entryPoint: "src/styles/index.ts",
+      modules: [
+        {
+          name: "atoms",
+          export: "atoms",
+          path: "src/styles/atoms.module.css",
+          layer: "components",
+          publicClasses: ["root"],
+        },
+      ],
+      admissionRule: { strategy: "project-review" },
+    },
+    layers: {
+      order: ["base", "components"],
+      ownership: [],
+      localModules: { strategy: "unlayered" },
+    },
+    composition: { mode: "markup" },
+    colorTokens: { enabled: false },
+    commands: {
+      "css:generate": "npm run css:generate",
+      "css:types": "npm run css:types",
+      "css:check": "npm run css:check",
+    },
+    enforcement: {
+      severity: "error",
+      privateBooleanAttributes: ["data-busy"],
+    },
+    exceptions: [],
+    ...overrides,
+  };
+}
+
+async function createFixture({ invalid = false, overrides = {} } = {}) {
+  // realpath keeps the root canonical, so Oxlint reports cwd-relative file paths
+  // (macOS os.tmpdir() is symlinked, which made Oxlint fall back to absolute paths).
+  const root = await realpath(await mkdtemp(path.join(os.tmpdir(), "css-modules-oxlint-")));
+  await write(root, ".agents/css-modules.json", `${JSON.stringify(profile(overrides), null, 2)}\n`);
+  await write(root, "src/button.module.css", ".root {}\n.loading {}\n");
+  await write(
+    root,
+    "src/button.tsx",
+    invalid
+      ? `import styles from "./button.module.css";
+import { mergeClasses, styleVariables } from "#styles";
+
+export function Button({ busy, size }: { busy: boolean; size: string }) {
+  return (
+    <button
+      disabled={busy}
+      data-disabled={busy}
+      data-busy={busy}
+      className={mergeClasses(styles[size], busy && styles.loading)}
+      style={{ opacity: busy ? 0.5 : 1 }}
+    />
+  );
+}
+`
+      : `import styles from "./button.module.css";
+import { mergeClasses, styleVariables } from "#styles";
+
+const SIZE_CLASS = { small: styles.root };
+
+export function Button({ busy }: { busy: boolean }) {
+  return (
+    <button
+      data-busy={busy || undefined}
+      className={mergeClasses(styles.root, SIZE_CLASS.small)}
+      style={styleVariables({ "--_opacity": busy ? 0.5 : 1 })}
+    />
+  );
+}
+`,
+  );
+  return root;
+}
+
+async function run(root, ...args) {
+  try {
+    const result = await execFileAsync(process.execPath, [
+      runner.pathname,
+      "--root",
+      root,
+      "--format",
+      "json",
+      ...args,
+    ]);
+    return { code: 0, ...result, json: JSON.parse(result.stdout) };
+  } catch (error) {
+    if (!error.stdout) {
+      throw new Error(`Oxlint runner produced no JSON. stderr: ${error.stderr || error.message}`);
+    }
+    return {
+      code: error.code,
+      stdout: error.stdout,
+      stderr: error.stderr,
+      json: JSON.parse(error.stdout),
+    };
+  }
+}
+
+test("Oxlint adapter reports the CSS Modules TSX rules with stable IDs", async () => {
+  const root = await createFixture({ invalid: true });
+
+  try {
+    const result = await run(root);
+    const ids = new Set(result.json.findings.map(({ ruleId }) => ruleId));
+
+    assert.equal(result.code, 1);
+    assert.equal(result.json.status, "failed");
+    assert.ok(result.json.findings.every(({ engine }) => engine === "oxlint"));
+    for (const id of [
+      "css-modules/no-computed-key",
+      "css-modules/no-boolean-state-class",
+      "css-modules/custom-property-style-only",
+      "css-modules/no-duplicate-state",
+      "css-modules/data-boolean-presence",
+    ]) {
+      assert.ok(ids.has(id), `missing ${id}`);
+    }
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("Oxlint adapter accepts compliant code and profile-specific helper names", async () => {
+  const root = await createFixture();
+
+  try {
+    const result = await run(root);
+
+    assert.equal(result.code, 0);
+    assert.equal(result.json.status, "passed");
+    assert.deepEqual(result.json.findings, []);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("Oxlint adapter supports warning-first adoption and documented exceptions", async () => {
+  const root = await createFixture({
+    invalid: true,
+    overrides: {
+      enforcement: { severity: "warning", privateBooleanAttributes: ["data-busy"] },
+      exceptions: [
+        {
+          kind: "rule",
+          rule: "css-modules/custom-property-style-only",
+          scope: "src/button.tsx",
+          match: "opacity",
+          reason: "Fixture integration owns this computed visual value.",
+        },
+      ],
+    },
+  });
+
+  try {
+    const result = await run(root);
+
+    assert.equal(result.code, 0);
+    assert.equal(result.json.status, "warnings");
+    assert.ok(result.json.findings.every(({ severity }) => severity === "warning"));
+    assert.equal(result.json.suppressed.length, 1);
+    assert.equal(
+      result.json.suppressed[0].finding.ruleId,
+      "css-modules/custom-property-style-only",
+    );
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("a file Oxlint cannot parse fails even during warning-first adoption", async () => {
+  const root = await createFixture({
+    overrides: {
+      enforcement: { severity: "warning", privateBooleanAttributes: ["data-loading"] },
+    },
+  });
+
+  try {
+    await write(root, "src/broken.tsx", "export const broken = (=> {\n");
+    const result = await run(root);
+    const parseErrors = result.json.findings.filter(
+      ({ ruleId }) => ruleId === "oxlint/parse-error",
+    );
+
+    // A file that never parsed had no rule applied to it, so lowering the rule
+    // severity must not turn that into a passing run.
+    assert.equal(parseErrors.length, 1);
+    assert.equal(parseErrors[0].severity, "error");
+    assert.equal(result.json.status, "failed");
+    assert.equal(result.code, 1);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("Oxlint follows imported aliases, conditional helper forms, and presence evidence", async () => {
+  const root = await createFixture();
+
+  try {
+    await write(
+      root,
+      "src/aliases.tsx",
+      `import styles from "./button.module.css";
+import { mergeClasses as cls, styleVariables as vars } from "#styles";
+
+export function Aliases({ busy, size }: { busy: boolean; size: string }) {
+  return <div
+    data-busy={busy ?? undefined}
+    data-busy={busy ? false : undefined}
+    className={cls(
+      busy && styles.loading,
+      busy ? styles.root : styles.loading,
+      { [styles.loading]: busy },
+      styles[size],
+    )}
+    style={vars({ "--_opacity": busy ? 1 : 0 })}
+  />;
+}
+
+export function Unrelated({ busy }: { busy: boolean }) {
+  function cls(value: unknown) { return value; }
+  return <div className={cls(busy && styles.loading)} />;
+}
+`,
+    );
+    const result = await run(root);
+    const ids = result.json.findings.map(({ ruleId }) => ruleId);
+
+    assert.equal(result.code, 1);
+    assert.equal(ids.filter((id) => id === "css-modules/no-computed-key").length, 1);
+    assert.equal(ids.filter((id) => id === "css-modules/no-boolean-state-class").length, 3);
+    assert.equal(ids.filter((id) => id === "css-modules/data-boolean-presence").length, 2);
+    assert.equal(ids.filter((id) => id === "css-modules/custom-property-style-only").length, 0);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+// Fails any attempt to load the ESLint toolchain, so the aggregate checker must
+// run an Oxlint project without those packages installed.
+const BLOCK_ESLINT = `data:text/javascript,${encodeURIComponent(`
+import { registerHooks } from "node:module";
+registerHooks({
+  resolve(specifier, context, nextResolve) {
+    if (/^(eslint|@babel\\/eslint-parser|@babel\\/core)$/.test(specifier)) {
+      throw new Error("blocked " + specifier);
+    }
+    return nextResolve(specifier, context);
+  },
+});
+`)}`;
+
+async function runAggregate(root) {
+  const checker = new URL("../scripts/check.mjs", import.meta.url).pathname;
+  try {
+    const result = await execFileAsync(process.execPath, [
+      "--import",
+      BLOCK_ESLINT,
+      checker,
+      "--root",
+      root,
+      "--format",
+      "json",
+    ]);
+    return { code: 0, json: JSON.parse(result.stdout) };
+  } catch (error) {
+    if (!error.stdout) throw new Error(`check.mjs produced no JSON: ${error.stderr}`);
+    return { code: error.code, json: JSON.parse(error.stdout) };
+  }
+}
+
+test("css:check runs the TSX rules through Oxlint when the project uses Oxlint", async () => {
+  const root = await createFixture({ invalid: true });
+
+  try {
+    await write(root, ".oxlintrc.json", "{}\n");
+    await write(root, "src/styles/atoms.module.css", ".root {}\n");
+    await write(
+      root,
+      "src/styles/index.ts",
+      'export type { Theme } from "./theme";\nexport { default as atoms } from "./atoms.module.css";\n',
+    );
+    const result = await runAggregate(root);
+    const engines = new Set(result.json.findings.map(({ engine }) => engine));
+
+    assert.equal(result.code, 1);
+    assert.ok(engines.has("oxlint"));
+    assert.ok(!engines.has("eslint"));
+    assert.ok(result.json.findings.some(({ ruleId }) => ruleId === "css-modules/no-computed-key"));
+    // oxc-parser proved the shared export without the Babel parser.
+    assert.ok(
+      !result.json.findings.some(({ ruleId }) => ruleId === "css-modules/shared-entry-export"),
+    );
+    assert.deepEqual(result.json.uncertainties ?? [], []);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});

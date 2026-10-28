@@ -1,0 +1,45 @@
+---
+import Codecs from "./codecs.astro";
+import Icon from "./icon.astro";
+import FeatureVideo from "./feature-video.astro";
+import styles from "./workflow.module.css";
+import { features } from "./content";
+
+---
+
+<ol class={styles.steps} aria-label="How it works">
+  {
+    features.map((feature, index) => (
+      <li>
+        <a class={styles.stepLink} href={`#${feature.id}`}>
+          <span class={styles.stepNumber}>{index + 1}</span>
+          {feature.title}
+        </a>
+      </li>
+    ))
+  }
+</ol>
+
+<div class={styles.bands}>
+  {
+    features.map((feature, index) => (
+    <section class:list={[styles.band, index % 2 === 0 ? styles.bandSurface : styles.bandSubtle]} aria-labelledby={feature.id}>
+      <div class={styles.bandHead}>
+        <h2 id={feature.id} class={styles.title}>
+          <Icon name={feature.id} />
+          {feature.title}
+        </h2>
+        <p class={styles.lead}>{feature.lead}</p>
+        <p class={styles.text}>{feature.text}</p>
+      </div>
+      <FeatureVideo id={feature.id} description={feature.video} src={feature.videoSrc} poster={feature.videoPoster} />
+    </section>
+    ))
+  }
+</div>
+
+<div class={styles.curious}>
+  <h2 class={styles.curiousTitle}>For the curious</h2>
+  <Codecs />
+</div>
+

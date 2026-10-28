@@ -1,0 +1,41 @@
+@layer ui {
+  .root {
+    margin-block: 8rem 2rem;
+
+    font-size: clamp(1.25rem, 5.4vw, 3rem);
+    font-weight: 500;
+    color: var(--color-fg-muted);
+    text-align: center;
+  }
+
+  .censored {
+    cursor: pointer;
+
+    padding: 0;
+    border: 0;
+
+    font: inherit;
+    color: inherit;
+
+    background: none;
+    filter: blur(10px);
+
+    transition: filter 0.3s ease;
+  }
+
+  .censored:hover,
+  .censored[aria-pressed="true"] {
+    filter: blur(0);
+  }
+
+  .censored:focus-visible {
+    outline: 2px solid var(--color-fg-primary);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .censored {
+      transition: none;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+@layer ui {
+  .page-wrapper {
+    background-color: var(--color-bg-canvas);
+  }
+
+  .page {
+    display: grid;
+    grid-template-columns: [full-start] 2rem [content-start] minmax(
+        0,
+        1fr
+      ) [content-end] 2rem [full-end];
+
+    max-inline-size: 72rem;
+    margin-inline: auto;
+    padding-block: calc(var(--site-header-full-height) + 3rem) 6rem;
+  }
+
+  :where(.page) > * {
+    grid-column: content;
+  }
+}

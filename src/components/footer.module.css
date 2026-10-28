@@ -1,0 +1,25 @@
+@layer ui {
+  .root {
+    padding-block: 1.4rem 1.1rem;
+    padding-inline: 2rem;
+    color: var(--color-fg-on-accent);
+    background-color: var(--color-fg-primary);
+  }
+
+  .text {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .link {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    color: inherit;
+    text-underline-offset: 0.2em;
+  }
+}

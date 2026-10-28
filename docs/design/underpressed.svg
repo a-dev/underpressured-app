@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200px" height="800px" viewBox="0 0 1200 800" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group</title>
+    <g id="Logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <rect id="Rectangle" fill="#FFF9F2" x="0" y="0" width="1200" height="800"></rect>
+            <g transform="translate(64, 46)" fill="#462E54" fill-rule="nonzero" font-family="Helvetica" font-weight="normal">
+                <text id="Logo" font-size="38">
+                    <tspan x="0" y="74">Logo</tspan>
+                </text>
+                <text id="A-little-photo,-unde" font-size="18">
+                    <tspan x="0" y="107">A little photo, under a lot of pressure.</tspan>
+                </text>
+            </g>
+            <g id="icon-(big)" transform="translate(67.6875, 219.6875)">
+                <rect id="Rectangle" fill="#FF7E6B" x="0" y="0" width="290.625" height="290.625" rx="65.390625"></rect>
+                <path d="M57.8560268,60.390625 C116.998884,81.8971185 176.141741,81.8971185 235.284598,60.390625 L250.070312,228.410106 C181.070312,207.799716 112.070312,207.799716 43.0703125,228.410106 L57.8560268,60.390625 Z" id="Path" stroke="#462E54" stroke-width="11.6875" fill="#FFE8CC" stroke-linejoin="round"></path>
+                <ellipse id="Oval" fill="#FFA68C" cx="175.140625" cy="148.59375" rx="24" ry="19.875"></ellipse>
+                <polyline id="Path" stroke="#462E54" stroke-width="9.6875" fill="#EAE5FF" stroke-linejoin="round" points="69.0234375 189.708874 116.25 131.992188 156.210938 173.548202 184.0625 151.615861 224.023438 193.171875"></polyline>
+                <path d="M115.039062,26.640625 L145.3125,49.6484375 L175.585938,26.640625 M115.039062,262.773438 L145.3125,239.765625 L175.585938,262.773438" id="Shape" stroke="#462E54" stroke-width="12.8984375" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+            <g transform="translate(450, 221)" fill="#462E54" fill-rule="nonzero" font-weight="normal">
+                <text id="underpressed" font-family="CherryBombOne-Regular, Cherry Bomb One" font-size="72">
+                    <tspan x="0" y="84">underpressed</tspan>
+                </text>
+                <text id="Less-weight.-Same-great-picture." font-family="Helvetica" font-size="22">
+                    <tspan x="3" y="116">Less weight. Same great picture.</tspan>
+                </text>
+            </g>
+            <line x1="64" y1="549" x2="1136" y2="549" id="Path" stroke-opacity="0.149019608" stroke="#462E54" fill="#000000"></line>
+            <g transform="translate(64, 585)" fill="#462E54" fill-rule="nonzero" font-family="Helvetica" font-size="16" font-weight="normal">
+                <text id="ACTUAL-SIZE-CHECK">
+                    <tspan x="0" y="15">ACTUAL-SIZE CHECK</tspan>
+                </text>
+                <text id="16-px">
+                    <tspan x="0" y="124">16 px</tspan>
+                </text>
+                <text id="32-px">
+                    <tspan x="56" y="124">32 px</tspan>
+                </text>
+                <text id="64-px">
+                    <tspan x="141" y="124">64 px</tspan>
+                </text>
+                <text id="128-px">
+                    <tspan x="269" y="124">128 px</tspan>
+                </text>
+                <text id="ONE-COLOUR-MARK">
+                    <tspan x="512" y="15">ONE-COLOUR MARK</tspan>
+                </text>
+                <text id="PALETTE">
+                    <tspan x="809" y="15">PALETTE</tspan>
+                </text>
+            </g>
+            <g transform="translate(64.5, 672.5)">
+                <rect id="Rectangle" fill="#FF7E6B" x="0" y="0" width="15" height="15" rx="3.375"></rect>
+                <path d="M2.98611751,3.11693548 C6.03865207,4.22694805 9.09118664,4.22694805 12.1437212,3.11693548 L12.9068548,11.7889087 C9.34556452,10.7251466 5.78427419,10.7251466 2.22298387,11.7889087 L2.98611751,3.11693548 Z" id="Path" stroke="#462E54" stroke-width="0.603225806" fill="#FFE8CC" stroke-linejoin="round"></path>
+                <ellipse id="Oval" fill="#FFA68C" cx="9.03951613" cy="7.66935484" rx="1.23870968" ry="1.02580645"></ellipse>
+                <polyline id="Path" stroke="#462E54" stroke-width="0.5" fill="#EAE5FF" stroke-linejoin="round" points="3.5625 9.79142575 6 6.8125 8.0625 8.95732654 9.5 7.82533475 11.5625 9.97016129"></polyline>
+                <path d="M5.9375,1.375 L7.5,2.5625 L9.0625,1.375 M5.9375,13.5625 L7.5,12.375 L9.0625,13.5625" id="Shape" stroke="#462E54" stroke-width="0.5625" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+            <g transform="translate(121, 657)">
+                <rect id="Rectangle" fill="#FF7E6B" x="0" y="0" width="30" height="30" rx="6.75"></rect>
+                <path d="M5.97223502,6.23387097 C12.0773041,8.4538961 18.1823733,8.4538961 24.2874424,6.23387097 L25.8137097,23.5778173 C18.691129,21.4502933 11.5685484,21.4502933 4.44596774,23.5778173 L5.97223502,6.23387097 Z" id="Path" stroke="#462E54" stroke-width="1.20645161" fill="#FFE8CC" stroke-linejoin="round"></path>
+                <ellipse id="Oval" fill="#FFA68C" cx="18.0790323" cy="15.3387097" rx="2.47741935" ry="2.0516129"></ellipse>
+                <polyline id="Path" stroke="#462E54" fill="#EAE5FF" stroke-linejoin="round" points="7.125 19.5828515 12 13.625 16.125 17.9146531 19 15.6506695 23.125 19.9403226"></polyline>
+                <path d="M11.875,2.75 L15,5.125 L18.125,2.75 M11.875,27.125 L15,24.75 L18.125,27.125" id="Shape" stroke="#462E54" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+            <g transform="translate(207, 626)">
+                <rect id="Rectangle" fill="#FF7E6B" x="0" y="0" width="60" height="60" rx="13.5"></rect>
+                <path d="M11.94447,12.4677419 C24.1546083,16.9077922 36.3647465,16.9077922 48.5748848,12.4677419 L51.6274194,47.1556347 C37.3822581,42.9005865 23.1370968,42.9005865 8.89193548,47.1556347 L11.94447,12.4677419 Z" id="Path" stroke="#462E54" stroke-width="2.41290323" fill="#FFE8CC" stroke-linejoin="round"></path>
+                <ellipse id="Oval" fill="#FFA68C" cx="36.1580645" cy="30.6774194" rx="4.95483871" ry="4.10322581"></ellipse>
+                <polyline id="Path" stroke="#462E54" stroke-width="2" fill="#EAE5FF" stroke-linejoin="round" points="14.25 39.165703 24 27.25 32.25 35.8293061 38 31.301339 46.25 39.8806452"></polyline>
+                <path d="M23.75,5.5 L30,10.25 L36.25,5.5 M23.75,54.25 L30,49.5 L36.25,54.25" id="Shape" stroke="#462E54" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+            <g transform="translate(337, 564)">
+                <rect id="Rectangle" fill="#FF7E6B" x="0" y="0" width="120" height="120" rx="27"></rect>
+                <path d="M23.8889401,24.9354839 C48.3092166,33.8155844 72.7294931,33.8155844 97.1497696,24.9354839 L103.254839,94.3112694 C74.7645161,85.801173 46.2741935,85.801173 17.783871,94.3112694 L23.8889401,24.9354839 Z" id="Path" stroke="#462E54" stroke-width="4.82580645" fill="#FFE8CC" stroke-linejoin="round"></path>
+                <ellipse id="Oval" fill="#FFA68C" cx="72.316129" cy="61.3548387" rx="9.90967742" ry="8.20645161"></ellipse>
+                <polyline id="Path" stroke="#462E54" stroke-width="4" fill="#EAE5FF" stroke-linejoin="round" points="28.5 78.331406 48 54.5 64.5 71.6586123 76 62.602678 92.5 79.7612903"></polyline>
+                <path d="M47.5,11 L60,20.5 L72.5,11 M47.5,108.5 L60,99 L72.5,108.5" id="Shape" stroke="#462E54" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+            <g transform="translate(596, 622)">
+                <rect id="Rectangle" fill="#462E54" x="0" y="0" width="60" height="60" rx="13.5"></rect>
+                <path d="M11.94447,12.4677419 C24.1546083,16.9077922 36.3647465,16.9077922 48.5748848,12.4677419 L51.6274194,47.1556347 C37.3822581,42.9005865 23.1370968,42.9005865 8.89193548,47.1556347 L11.94447,12.4677419 Z" id="Path" stroke="#FFF9F2" stroke-width="2.41290323" fill="#462E54" stroke-linejoin="round"></path>
+                <ellipse id="Oval" fill="#462E54" cx="36.1580645" cy="30.6774194" rx="4.95483871" ry="4.10322581"></ellipse>
+                <polyline id="Path" stroke="#FFF9F2" stroke-width="2" fill="#462E54" stroke-linejoin="round" points="14.25 39.165703 24 27.25 32.25 35.8293061 38 31.301339 46.25 39.8806452"></polyline>
+                <path d="M23.75,5.5 L30,10.25 L36.25,5.5 M23.75,54.25 L30,49.5 L36.25,54.25" id="Shape" stroke="#FFF9F2" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+            <circle id="Oval" stroke-opacity="0.121568627" stroke="#462E54" fill="#FF7E6B" cx="893" cy="652" r="19"></circle>
+            <circle id="Oval" stroke-opacity="0.121568627" stroke="#462E54" fill="#462E54" cx="938" cy="652" r="19"></circle>
+            <circle id="Oval" stroke-opacity="0.121568627" stroke="#462E54" fill="#EAE5FF" cx="983" cy="652" r="19"></circle>
+            <circle id="Oval" stroke-opacity="0.121568627" stroke="#462E54" fill="#FFA68C" cx="1028" cy="652" r="19"></circle>
+            <circle id="Oval" stroke-opacity="0.121568627" stroke="#462E54" fill="#FFE8CC" cx="1073" cy="652" r="19"></circle>
+            <circle id="Oval" stroke-opacity="0.121568627" stroke="#462E54" fill="#FFF9F2" cx="1118" cy="652" r="19"></circle>
+        </g>
+    </g>
+</svg>

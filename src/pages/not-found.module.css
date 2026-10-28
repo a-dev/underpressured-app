@@ -1,0 +1,38 @@
+@layer ui {
+  .column {
+    justify-self: center;
+    inline-size: 100%;
+    max-inline-size: 46rem;
+    padding-block: 3rem;
+  }
+
+  .title {
+    margin-block-start: 2rem;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .text {
+    max-inline-size: 60ch;
+    margin-block-start: 1rem;
+    color: var(--color-fg-muted);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-block-start: 2rem;
+  }
+
+  .action {
+    color: var(--color-fg-primary);
+    text-underline-offset: 0.2em;
+  }
+
+  .action:focus-visible {
+    outline: 2px solid var(--color-fg-primary);
+    outline-offset: 2px;
+  }
+}

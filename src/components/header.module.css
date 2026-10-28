@@ -1,0 +1,108 @@
+@layer ui {
+  .root {
+    --site-header-min-height: 16px;
+    --site-header-min-scale: 0;
+    --effective-squish: clamp(-0.22, var(--squish-progress), 1.12);
+
+    will-change: block-size;
+
+    position: fixed;
+    z-index: 100;
+    inset-block-start: 0;
+    inset-inline: 0;
+
+    overflow: hidden;
+
+    inline-size: 100%;
+    block-size: calc(
+      var(--site-header-full-height) -
+        (var(--site-header-full-height) - var(--site-header-min-height)) * var(--effective-squish)
+    );
+    padding-inline: var(--site-header-gutter);
+
+    background-color: var(--color-bg-canvas);
+  }
+
+  .root:focus,
+  .root:focus-visible,
+  .root:focus-within {
+    outline: none;
+  }
+
+  .inner {
+    isolation: isolate;
+    position: relative;
+
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    inline-size: fit-content;
+    block-size: 100%;
+    margin-inline: auto;
+    padding-block: 8px;
+  }
+
+  .line {
+    position: absolute;
+    inset-inline: 0;
+    block-size: 8px;
+    background-color: var(--color-fg-primary);
+  }
+
+  .line-top {
+    z-index: 1;
+    inset-block-start: 0;
+  }
+
+  .line-bottom {
+    inset-block-end: 0;
+    border-end-start-radius: 3px;
+    border-end-end-radius: 3px;
+  }
+
+  .root .line {
+    transition: block-size 0.3s;
+  }
+
+  .root:focus-within .line {
+    block-size: 16px;
+  }
+
+  .title {
+    will-change: transform;
+    user-select: none;
+
+    transform: translateY(calc(-0.06em * var(--site-header-stretch)))
+      scaleY(
+        calc(
+          var(--site-header-stretch) *
+            max(0, 1 - (1 - var(--site-header-min-scale)) * var(--effective-squish))
+        )
+      );
+
+    padding-inline-end: 0.03em;
+
+    font-family: var(--font-display);
+    font-size: var(--site-header-font-size);
+    font-weight: 400;
+    line-height: 0.76;
+    color: var(--color-accent-primary);
+    text-shadow: 0.07em -0.05em var(--color-fg-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .link {
+    display: block;
+    text-decoration: none;
+  }
+
+  @media (width <= 48rem) {
+    .inner {
+      inline-size: 100%;
+    }
+  }
+}

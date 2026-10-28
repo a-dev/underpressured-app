@@ -1,0 +1,31 @@
+---
+import Page from "../layouts/page.astro";
+import Brand from "../components/brand.astro";
+import HeroIntro from "../components/hero-intro.astro";
+import Workflow from "../components/home/workflow.astro";
+import Faq from "../components/home/faq.astro";
+import Outro from "../components/home/outro.astro";
+import styles from "./index.module.css";
+---
+
+<Page
+  title="Underpressured: batch image compression for Mac"
+  description="Underpressured is a free, open-source Mac app. Compress, convert, and resize images in batches. Save presets to reuse your settings."
+  socialTitle="Underpressured: compresses, converts, and resizes images on Mac"
+  socialDescription="Compress, convert, and resize one image or a folder of images on your Mac. Underpressured is free and open source."
+  softwareApplication={{
+    name: "Underpressured",
+    description: "Underpressured is a free, open-source Mac app. Compress, convert, and resize images in batches. Save presets to reuse your settings.",
+    operatingSystem: "macOS 27 or later",
+    processorRequirements: "Apple Silicon",
+  }}
+>
+  <section class={styles.hero} aria-labelledby="slogan">
+    <Brand sloganAs="h1" sloganId="slogan" />
+    <HeroIntro />
+  </section>
+
+  <Workflow />
+  <Faq />
+  <Outro />
+</Page>

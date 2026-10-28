@@ -1,0 +1,120 @@
+---
+import Page from "../layouts/page.astro";
+import { web3formsAccessKey } from "../shared/config/support";
+import Brand from "../components/brand.astro";
+import styles from "./support.module.css";
+---
+
+<Page
+  title="Underpressured support and bug reports"
+  description="Get help with Underpressured. Send a message through the support form or email support@underpressured.app to report a problem or suggest an improvement."
+  socialTitle="Help with Underpressured"
+  socialDescription="Contact Underpressured support through the form or by email. Describe a problem or suggest an improvement."
+>
+  <div class={styles.column}>
+    <Brand class={styles.brand} />
+
+    <header class={styles.header}>
+      <h1 class={styles.title}>Help with Underpressured</h1>
+      <p class={styles.lead}>
+        Something not working as expected, or have an idea to make the app better? Write to us
+        through the form below or email{" "}
+        <a class={styles.link} href="mailto:support@underpressured.app">support@underpressured.app</a>.
+      </p>
+    </header>
+
+    <section class={styles.section} aria-labelledby="support-include">
+      <h2 id="support-include" class={styles.sectionTitle}>What to include</h2>
+      <p>
+        Tell us what you tried to do, what happened, and what you expected instead. Add your macOS
+        and Underpressured versions, the image format, and the preset or settings you used. If you
+        saw an error message, copy its exact wording. These details help us reproduce the problem
+        quickly.
+      </p>
+    </section>
+
+    <section class={styles.section} aria-labelledby="support-samples">
+      <h2 id="support-samples" class={styles.sectionTitle}>Sample images</h2>
+      <p>
+        If a sample image would make the problem clearer, attach it to an email instead of the form.
+        Send only images you have permission to share, and remove any private information first.
+      </p>
+    </section>
+
+    <form
+      class={styles.form}
+      data-support-form
+      action="https://api.web3forms.com/submit"
+      method="POST"
+    >
+      <input type="hidden" name="access_key" value={web3formsAccessKey} />
+
+      <div class={styles.field}>
+        <label class={styles.label} for="support-name">Name</label>
+        <input
+          class={styles.input}
+          id="support-name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          required
+        />
+      </div>
+
+      <div class={styles.field}>
+        <label class={styles.label} for="support-email">Email address</label>
+        <p class={styles.hint} id="support-email-hint">
+          Enter the email address where you want to receive a reply.
+        </p>
+        <input
+          class={styles.input}
+          id="support-email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          autocapitalize="off"
+          autocorrect="off"
+          spellcheck="false"
+          aria-describedby="support-email-hint"
+          required
+        />
+      </div>
+
+      <div class={styles.field}>
+        <label class={styles.label} for="support-message">Message</label>
+        <p class={styles.hint} id="support-message-hint">
+          Describe the problem or suggestion. Include your app version, macOS version, image format, and preset or settings if you know them.
+        </p>
+        <textarea
+          class={styles.message}
+          id="support-message"
+          name="message"
+          rows="8"
+          aria-describedby="support-message-hint"
+          required
+        ></textarea>
+      </div>
+
+      <p class={styles.requiredNote}>All fields are required.</p>
+      <button class={styles.submit} data-support-submit type="submit">
+        Send message
+      </button>
+    </form>
+
+    <p class={styles.status} data-support-status role="status" aria-live="polite" aria-atomic="true"></p>
+
+    <p class={styles.notice}>
+      This form sends your name, email address, and message through Web3Forms to Underpressured support. Do not include passwords or other sensitive information.
+    </p>
+
+    <noscript>
+      <p class={styles.noScript}>
+        Without JavaScript, submitting the form takes you to the form service.
+      </p>
+    </noscript>
+  </div>
+</Page>
+
+<script>
+  import "../scripts/support-form";
+</script>

@@ -1,0 +1,39 @@
+---
+import styles from "./faq.module.css";
+---
+
+<section class={styles.root} aria-labelledby="faq-title">
+  <h2 id="faq-title" class={styles.title}>Common questions</h2>
+  <div class={styles.list}>
+    <div class={styles.item}>
+      <h3 class={styles.question}>Is Underpressured free and open source?</h3>
+      <p class={styles.answer}>
+        Yes. Underpressured is free and open source.
+      </p>
+    </div>
+    <div class={styles.item}>
+      <h3 class={styles.question}>Which languages does the app support?</h3>
+      <p class={styles.answer}>
+        The app supports English, Spanish, Brazilian Portuguese, German, French, Arabic, Japanese,
+        and Simplified Chinese.
+      </p>
+    </div>
+    <div class={styles.item}>
+      <h3 class={styles.question}>Which Mac does it require?</h3>
+      <p class={styles.answer}>
+        Underpressured requires a Mac with Apple Silicon and macOS 27 or later.
+      </p>
+    </div>
+    <div class={styles.item}>
+      <h3 class={styles.question}>Is Underpressured available now?</h3>
+      <p class={styles.answer}>Not yet. It is coming soon for Mac.</p>
+    </div>
+    <div class={styles.item}>
+      <h3 class={styles.question}>Where can I read about the benchmarks?</h3>
+      <p class={styles.answer}>
+        The <a class={styles.link} href="/benchmarks/">benchmarks page</a> explains the test setup,
+        results, and limits.
+      </p>
+    </div>
+  </div>
+</section>

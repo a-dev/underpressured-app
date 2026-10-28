@@ -1,0 +1,66 @@
+@layer ui {
+  .root {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .caption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .title {
+    font-weight: 600;
+  }
+
+  .note {
+    font-size: 0.875rem;
+    color: var(--color-fg-muted);
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    list-style: none;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.25rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .label {
+    font-weight: 500;
+  }
+
+  .value {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-fg-muted);
+  }
+
+  .track {
+    grid-column: 1 / -1;
+    border-inline-start: 1px solid var(--color-border-strong);
+  }
+
+  .bar {
+    display: block;
+
+    inline-size: max(var(--_value), 4px);
+    block-size: 1rem;
+    border-radius: 0 4px 4px 0;
+
+    background-color: var(--color-fg-muted);
+  }
+
+  .bar-pick {
+    background-color: var(--color-accent-primary);
+  }
+}

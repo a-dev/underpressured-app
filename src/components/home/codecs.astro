@@ -1,0 +1,21 @@
+---
+import styles from "./codecs.module.css";
+import { codecs } from "./content";
+---
+
+<details class={styles.root}>
+  <summary class={styles.summary}>Codecs under the hood</summary>
+  <dl class={styles.list}>
+    {
+      codecs.map((codec) => (
+        <div class={styles.item}>
+          <dt class={styles.name}>
+            {codec.name} <span class={styles.format}>{codec.format}</span>
+          </dt>
+          <dd class={styles.text}>{codec.text}</dd>
+        </div>
+      ))
+    }
+  </dl>
+  <a class={styles.link} href="/benchmarks">See the benchmarks →</a>
+</details>

@@ -1,0 +1,14 @@
+@layer ui {
+  .root {
+    flex-shrink: 0;
+
+    inline-size: 1.25em;
+    block-size: 1.25em;
+
+    fill: none;
+    stroke: currentcolor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.75;
+  }
+}

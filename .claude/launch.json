@@ -1,0 +1,30 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "astro-dev",
+      "runtimeExecutable": "./node_modules/.bin/astro",
+      "runtimeArgs": [
+        "dev",
+        "--port",
+        "4321"
+      ],
+      "port": 4321
+    },
+    {
+      "name": "astro-dev-attach",
+      "url": "http://localhost:4321",
+      "port": 4321
+    },
+    {
+      "name": "astro-preview",
+      "runtimeExecutable": "./node_modules/.bin/astro",
+      "runtimeArgs": [
+        "preview",
+        "--port",
+        "4322"
+      ],
+      "port": 4322
+    }
+  ]
+}

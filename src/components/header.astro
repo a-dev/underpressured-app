@@ -1,0 +1,20 @@
+---
+import styles from "./header.module.css";
+
+const home = import.meta.env.BASE_URL;
+const isHome = Astro.url.pathname === home;
+---
+
+<header class={styles.root}>
+  <div class={styles.inner}>
+    <span class:list={[styles.line, styles.lineTop]} aria-hidden="true"></span>
+    <a
+      class:list={[styles.title, styles.link]}
+      href={home}
+      aria-current={isHome ? "page" : undefined}
+    >
+      UNDERPRESSURED
+    </a>
+    <span class:list={[styles.line, styles.lineBottom]} aria-hidden="true"></span>
+  </div>
+</header>

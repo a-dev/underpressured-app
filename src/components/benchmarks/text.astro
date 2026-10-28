@@ -1,0 +1,22 @@
+---
+import { linkify } from "./links";
+import styles from "./text.module.css";
+
+interface Props {
+  text: string;
+}
+
+const segments = linkify(Astro.props.text);
+---
+
+{
+  segments.map((segment) =>
+    segment.href ? (
+      <a class={styles.link} href={segment.href} target="_blank" rel="noopener">
+        {segment.text}
+      </a>
+    ) : (
+      segment.text
+    ),
+  )
+}

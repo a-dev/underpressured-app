@@ -1,0 +1,50 @@
+---
+import styles from "./logo.module.css";
+
+type Props = {
+  class?: string;
+};
+
+const { class: className } = Astro.props;
+---
+
+<svg
+  class:list={[styles.root, className]}
+  aria-hidden="true"
+  viewBox="0 0 290.625 290.625"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <rect
+    fill="var(--color-accent-primary)"
+    x="0"
+    y="0"
+    width="290.625"
+    height="290.625"
+    rx="65.390625"></rect>
+  <path
+    d="M57.8560268,60.390625 C116.998884,81.8971185 176.141741,81.8971185 235.284598,60.390625 L250.070312,228.410106 C181.070312,207.799716 112.070312,207.799716 43.0703125,228.410106 L57.8560268,60.390625 Z"
+    stroke="var(--color-fg-primary)"
+    stroke-width="11.6875"
+    fill="var(--color-bg-surface)"
+    stroke-linejoin="round"></path>
+  <ellipse
+    fill="var(--color-accent-secondary)"
+    cx="175.140625"
+    cy="148.59375"
+    rx="24"
+    ry="19.875"></ellipse>
+  <polyline
+    stroke="var(--color-fg-primary)"
+    stroke-width="9.6875"
+    fill="var(--color-bg-subtle)"
+    stroke-linejoin="round"
+    points="69.0234375 189.708874 116.25 131.992188 156.210938 173.548202 184.0625 151.615861 224.023438 193.171875"
+  ></polyline>
+  <path
+    d="M115.039062,26.640625 L145.3125,49.6484375 L175.585938,26.640625 M115.039062,262.773438 L145.3125,239.765625 L175.585938,262.773438"
+    stroke="var(--color-fg-primary)"
+    stroke-width="12.8984375"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"></path>
+</svg>

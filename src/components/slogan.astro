@@ -1,0 +1,14 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import styles from "./slogan.module.css";
+
+interface Props extends HTMLAttributes<"p"> {
+  as?: "h1" | "p";
+}
+
+const { as: Tag = "p", class: className, ...attrs } = Astro.props;
+---
+
+<Tag class:list={[styles.root, className]} {...attrs}>
+  <span class={styles.line}>com<span class={styles.emphasis}>press</span></span><span class={styles.line}>them</span><span class={styles.line}>all</span>
+</Tag>

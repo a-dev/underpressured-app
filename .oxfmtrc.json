@@ -1,0 +1,33 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": [
+    "**/*.d.ts",
+    "dist/**",
+    ".astro/**",
+    ".agents/**",
+    ".claude/**",
+    "docs/**",
+    "bun.lock"
+  ],
+  "overrides": [
+    {
+      "files": ["src/**/*.ts"],
+      "options": {
+        "sortImports": {
+          "customGroups": [
+            {
+              "groupName": "styles",
+              "elementNamePattern": ["#styles", "#styles/**", "*.module.css"]
+            }
+          ],
+          "groups": [
+            ["builtin", "external"],
+            ["parent", "sibling", "index"],
+            ["style", "styles"],
+            "unknown"
+          ]
+        }
+      }
+    }
+  ]
+}

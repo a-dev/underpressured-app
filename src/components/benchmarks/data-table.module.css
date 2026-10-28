@@ -1,0 +1,56 @@
+@layer ui {
+  .root {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-inline-size: 0;
+  }
+
+  .scroller {
+    overflow-x: auto;
+  }
+
+  .scroller:focus-visible {
+    outline: 2px solid var(--color-fg-primary);
+    outline-offset: 2px;
+  }
+
+  .table {
+    border-collapse: collapse;
+
+    inline-size: 100%;
+
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .caption {
+    padding-block-end: 0.75rem;
+    font-weight: 600;
+    text-align: start;
+  }
+
+  .head,
+  .row-head,
+  .cell {
+    padding: 0.5rem 0.75rem;
+    border-block-end: 1px solid var(--color-border-subtle);
+    text-align: start;
+    white-space: nowrap;
+  }
+
+  .head {
+    border-block-end-color: var(--color-border-strong);
+    font-weight: 400;
+    color: var(--color-fg-muted);
+  }
+
+  .row-head {
+    font-weight: 500;
+  }
+
+  .pick > * {
+    font-weight: 700;
+  }
+}
