@@ -1,0 +1,18 @@
+---
+import Page from "../layouts/page.astro";
+import Brand from "../components/brand.astro";
+import { Content } from "../../docs/privacy-policy.md";
+import styles from "./privacy.module.css";
+---
+
+<Page
+  title="Underpressured privacy policy"
+  description="Underpressured does not collect personal data. Images stay on your Mac. Read how the app handles files, updates, crash reports, and support email."
+>
+  <div class={styles.column}>
+    <Brand class={styles.brand} />
+    <article class={styles.prose}>
+      <Content />
+    </article>
+  </div>
+</Page>
