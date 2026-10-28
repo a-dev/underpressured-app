@@ -8,8 +8,8 @@ import styles from "./hero-intro.module.css";
   <p class={styles.text}>{appLanguages}</p>
   <div class={styles.actions}>
     <div class={styles.downloads}>
-      <div class={styles.downloadLinks} inert>
-        <a class={styles.appStore} href="#">
+      <div class={styles.appStoreSlot}>
+        <a class:list={[styles.appStore, styles.unavailable]} href="#" inert>
           <img
             class={styles.appStoreBadge}
             src="/badges/download-on-the-mac-app-store.svg"
@@ -18,7 +18,9 @@ import styles from "./hero-intro.module.css";
             height="40"
           />
         </a>
-        <a
+        <span class={styles.comingSoon}>Coming soon</span>
+      </div>
+      <a
           class={styles.github}
           href="https://github.com/a-dev/underpressured/releases/latest"
         >
@@ -34,8 +36,6 @@ import styles from "./hero-intro.module.css";
           </svg>
           Download from GitHub
         </a>
-      </div>
-      <span class={styles.comingSoon}>Coming soon</span>
     </div>
     <span class={styles.requirements}
       >Apple Silicon · macOS 27 or later</span

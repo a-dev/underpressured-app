@@ -1,5 +1,5 @@
 export const intro =
-  "Underpressured is a free, open-source app for Mac. It compresses, converts, and resizes images. Add a folder. Choose your settings. Process the images together. You can also process a single image. Save a preset to reuse your settings. Choose where to save the results. Compare file sizes after Underpressured completes the batch.";
+  "Underpressured is a free, open-source Mac app that compresses, converts, and resizes images. Drop in a whole folder or a single image, pick your settings, and it handles them all at once. You can save your settings as a preset for next time and choose where the results go. When it's done, you can compare the file sizes before and after.";
 
 export const appLanguages =
   "The app supports English, Spanish, Brazilian Portuguese, German, French, Arabic, Japanese, and Simplified Chinese.";
