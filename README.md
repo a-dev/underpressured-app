@@ -13,16 +13,18 @@ bun run dev
 
 ## Commands
 
-| Command                      | Action                                             |
-| ---------------------------- | -------------------------------------------------- |
-| `bun run check`              | Type-check Astro files.                            |
-| `bun run lint`               | Lint scripts.                                      |
-| `bun run stylelint`          | Lint CSS.                                          |
-| `bun run format:check`       | Check formatting.                                  |
-| `bun run test`               | Run unit tests.                                    |
-| `bun run check:built`        | Build, then check links and canonicals in `dist/`. |
-| `bun run deploy:check`       | Build and run a Wrangler dry run.                  |
-| `bun run preview:cloudflare` | Build and serve with the local Cloudflare runtime. |
+| Command                      | Action                                                  |
+| ---------------------------- | ------------------------------------------------------- |
+| `bun run check`              | Type-check Astro files (isolated TypeScript 6 checker). |
+| `bun run lint`               | Lint scripts.                                           |
+| `bun run stylelint`          | Lint CSS.                                               |
+| `bun run format:check`       | Check formatting.                                       |
+| `bun run test`               | Run unit tests.                                         |
+| `bun run check:built`        | Build, then check links and canonicals in `dist/`.      |
+| `bun run deploy:check`       | Build and run a Wrangler dry run.                       |
+| `bun run preview:cloudflare` | Build and serve with the local Cloudflare runtime.      |
+
+The Astro checker runs with pinned TypeScript 6 packages, following Quizbun’s workaround. The project keeps TypeScript 7. SonarJS rules run through Oxlint’s `jsPlugins`. Its isolated install in `tools/sonarjs/` uses TypeScript 5 because SonarJS cannot load against TypeScript 7; `postinstall` installs it automatically.
 
 ## Project map
 

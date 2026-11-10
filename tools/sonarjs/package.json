@@ -1,0 +1,10 @@
+{
+  "name": "@underpressured/sonarjs",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Isolate SonarJS from the project TypeScript 7 runtime.",
+  "dependencies": {
+    "eslint-plugin-sonarjs": "4.2.2",
+    "typescript": "5.9.3"
+  }
+}

@@ -37,3 +37,27 @@ describe("library links", () => {
     expect(first).toContain(`[${name}]`);
   });
 });
+
+describe("linkify", () => {
+  it.each(["", "Plain text", "Unicode: café & <text>"])("preserves unmarked text: %s", (text) => {
+    expect(linkify(text)).toEqual([{ text }]);
+  });
+
+  it("preserves text around adjacent marked libraries", () => {
+    expect(linkify("Before [jpegli][oxipng] after")).toEqual([
+      { text: "Before " },
+      { text: "jpegli", href: libraries.jpegli },
+      { text: "" },
+      { text: "oxipng", href: libraries.oxipng },
+      { text: " after" },
+    ]);
+  });
+
+  it.each(["[unknown]", "[]"])("rejects unknown library markers: %s", (text) => {
+    expect(() => linkify(text)).toThrow("No link for");
+  });
+
+  it("rejects an unclosed marker", () => {
+    expect(() => linkify("Before [jpegli")).toThrow("Unclosed [");
+  });
+});

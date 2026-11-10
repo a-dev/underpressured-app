@@ -1,42 +1,106 @@
 [
   {
-    "label": "test:unit",
+    "label": "dev",
     "command": "bun",
-    "args": ["run", "test:unit"],
+    "args": ["run", "dev"],
     "cwd": "$ZED_WORKTREE_ROOT",
     "save": "all",
-    "allow_concurrent_runs": true
+    "allow_concurrent_runs": false
   },
   {
-    "label": "test:browser",
+    "label": "build",
     "command": "bun",
-    "args": ["run", "test:browser"],
+    "args": ["run", "build"],
     "cwd": "$ZED_WORKTREE_ROOT",
     "save": "all",
-    "allow_concurrent_runs": true
+    "allow_concurrent_runs": false
   },
   {
-    "label": "test:e2e",
+    "label": "preview",
     "command": "bun",
-    "args": ["run", "e2e"],
+    "args": ["run", "preview"],
     "cwd": "$ZED_WORKTREE_ROOT",
     "save": "all",
-    "allow_concurrent_runs": true
+    "allow_concurrent_runs": false
   },
   {
-    "label": "test:current_file",
+    "label": "check",
     "command": "bun",
-    "args": ["scripts/zed-run-tests.ts", "current-file", "$ZED_FILE"],
+    "args": ["run", "check"],
     "cwd": "$ZED_WORKTREE_ROOT",
     "save": "all",
-    "allow_concurrent_runs": true
+    "allow_concurrent_runs": false
   },
   {
-    "label": "test:current_folder",
+    "label": "lint",
     "command": "bun",
-    "args": ["scripts/zed-run-tests.ts", "current-folder", "$ZED_DIRNAME"],
+    "args": ["run", "lint"],
     "cwd": "$ZED_WORKTREE_ROOT",
     "save": "all",
-    "allow_concurrent_runs": true
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "stylelint",
+    "command": "bun",
+    "args": ["run", "stylelint"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "save": "all",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "format:check",
+    "command": "bun",
+    "args": ["run", "format:check"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "save": "all",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "test",
+    "command": "bun",
+    "args": ["run", "test"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "save": "all",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "check:built",
+    "command": "bun",
+    "args": ["run", "check:built"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "save": "all",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "deploy:check",
+    "command": "bun",
+    "args": ["run", "deploy:check"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "save": "all",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "preview:cloudflare",
+    "command": "bun",
+    "args": ["run", "preview:cloudflare"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "save": "all",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "test:current-file",
+    "command": "bun",
+    "args": ["run", "test", "$ZED_FILE"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "save": "all",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "test:current-folder",
+    "command": "bun",
+    "args": ["run", "test", "$ZED_DIRNAME"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "save": "all",
+    "allow_concurrent_runs": false
   }
 ]

@@ -5,7 +5,7 @@
   "jsPlugins": [
     {
       "name": "sonarjs",
-      "specifier": "eslint-plugin-sonarjs"
+      "specifier": "./tools/sonarjs/node_modules/eslint-plugin-sonarjs/cjs/plugin.js"
     }
   ],
   "categories": {

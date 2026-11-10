@@ -263,8 +263,9 @@ if (sitemapFiles.length === 0) {
   }
   for (const file of htmlFiles) {
     if (noindexPages.has(file)) continue;
-    const canonicalTag = (htmlByFile.get(file).match(/<link\b[^>]*rel=["']canonical["'][^>]*>/i) ??
-      [])[0];
+    const canonicalTag = (
+      htmlByFile.get(file).match(/<link\b[^>]*rel=["']canonical["'][^>]*>/i) ?? []
+    )[0];
     if (!canonicalTag) continue;
     const canonical = new URL(decoded(attributes(canonicalTag).get("href") ?? ""), siteOrigin);
     if (!pageUrls.has(canonical.href))

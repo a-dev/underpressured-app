@@ -19,6 +19,7 @@ interface Props {
     description: string;
     operatingSystem: string;
     processorRequirements: string;
+    installUrl: string;
   };
 }
 
@@ -43,8 +44,30 @@ const absoluteSocialImage = new URL(socialImage, site);
 const applicationJsonLd = softwareApplication
   ? JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      ...softwareApplication,
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": new URL("/#website", site).href,
+          name: "Underpressured",
+          url: site.href,
+          inLanguage: "en",
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": new URL("/#app", site).href,
+          ...softwareApplication,
+          url: canonical.href,
+          image: absoluteSocialImage.href,
+          applicationCategory: "MultimediaApplication",
+          isAccessibleForFree: true,
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+            url: softwareApplication.installUrl,
+          },
+        },
+      ],
     }).replace(/</g, "\\u003c")
   : undefined;
 ---

@@ -10,28 +10,27 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "astro check",
+    "check": "bun run check:astro",
     "lint": "oxlint",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "stylelint": "stylelint \"src/**/*.{css,astro}\"",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run",
     "cf:login": "wrangler login",
     "cf:whoami": "wrangler whoami",
     "deploy": "bun run build && bun run deploy:upload",
     "deploy:upload": "wrangler deploy",
     "deploy:check": "bun run build && wrangler deploy --dry-run",
     "preview:cloudflare": "bun run build && wrangler dev",
-    "check:built": "bun run build && node scripts/check-built-output.mjs"
+    "check:built": "bun run build && node scripts/check-built-output.mjs",
+    "check:astro": "bunx --package=typescript@6.0.3 --package=@astrojs/check@0.9.9 astro-check --root .",
+    "postinstall": "bun install --cwd tools/sonarjs --frozen-lockfile"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.4.8"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.12",
-    "eslint": "^10.14.0",
-    "eslint-plugin-sonarjs": "^4.2.2",
     "oxfmt": "^0.78.0",
     "oxlint": "^1.93.0",
     "postcss-html": "^2.0.0",
