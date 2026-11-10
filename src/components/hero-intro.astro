@@ -8,18 +8,18 @@ import styles from "./hero-intro.module.css";
   <p class={styles.text}>{appLanguages}</p>
   <div class={styles.actions}>
     <div class={styles.downloads}>
-      <div class={styles.appStoreSlot}>
-        <a class:list={[styles.appStore, styles.unavailable]} href="#" inert>
-          <img
-            class={styles.appStoreBadge}
-            src="/badges/download-on-the-mac-app-store.svg"
-            alt="Download on the Mac App Store"
-            width="156"
-            height="40"
-          />
-        </a>
-        <span class={styles.comingSoon}>Coming soon</span>
-      </div>
+      <a
+        class={styles.appStore}
+        href="https://apps.apple.com/ge/app/underpressured/id6828201625"
+      >
+        <img
+          class={styles.appStoreBadge}
+          src="/badges/download-on-the-mac-app-store.svg"
+          alt="Download on the Mac App Store"
+          width="156"
+          height="40"
+        />
+      </a>
       <a
           class={styles.github}
           href="https://github.com/a-dev/underpressured/releases/latest"
