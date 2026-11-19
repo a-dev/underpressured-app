@@ -42,6 +42,11 @@ function pageBase(file) {
   return `${siteOrigin}/${relativePath}`;
 }
 
+function urlPathForPage(file) {
+  const relativePath = path.relative(outputDirectory, file).replace(/(index)?\.html$/, "");
+  return `/${relativePath.replace(/\/$/, "")}`;
+}
+
 function fail(file, message) {
   errors.push(`${path.relative(outputDirectory, file)}: ${message}`);
 }
@@ -110,7 +115,7 @@ for (const file of htmlFiles) {
     if (canonicals.length === 1) {
       const canonicalHref = decoded(attributes(canonicals[0]).get("href") ?? "");
       const canonicalUrl = new URL(canonicalHref, siteOrigin);
-      const expectedPath = `/${path.relative(outputDirectory, file).replace(/index\.html$/, "")}`;
+      const expectedPath = urlPathForPage(file);
       if (
         !/^https:\/\//i.test(canonicalHref) ||
         canonicalUrl.origin !== siteOrigin ||
@@ -256,8 +261,8 @@ if (sitemapFiles.length === 0) {
       if (!target) fail(sitemapFile, `sitemap URL has no built page: ${url.href}`);
       else if (noindexPages.has(target))
         fail(sitemapFile, `noindex page is included in sitemap: ${url.href}`);
-      if (!url.pathname.endsWith("/"))
-        fail(sitemapFile, `sitemap URL does not use trailing slash: ${url.href}`);
+      if (url.pathname !== "/" && url.pathname.endsWith("/"))
+        fail(sitemapFile, `sitemap URL has a trailing slash: ${url.href}`);
       pageUrls.add(url.href);
     }
   }
