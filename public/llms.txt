@@ -1,0 +1,14 @@
+# Underpressured
+
+> Underpressured is a free, open-source (MIT) Mac app that compresses, converts, and resizes images in batches. It needs a Mac with Apple silicon and macOS 27 or later. It reads HEIC, WebP, AVIF, TIFF, JPEG XL, JPEG, and PNG and writes JPEG or PNG. Settings are saved as presets. All processing happens on the Mac, with no account and no analytics.
+
+## Pages
+
+- [Overview](https://underpressured.app/): features, encoders, and common questions.
+- [Comparison](https://underpressured.app/compare/): Underpressured compared with ImageOptim, iMazing Converter, Clop, Zipic, Compresto, JPEGmini, TinyPNG, Squoosh, XnConvert, and Finder's Convert Image, including when another app is a better choice.
+- [Benchmarks](https://underpressured.app/benchmarks/): file sizes, quality scores, processing times, test setup, and limits.
+
+## Download
+
+- [Mac App Store](https://apps.apple.com/app/underpressured/id6828201625)
+- [GitHub releases](https://github.com/a-dev/underpressured/releases/latest)

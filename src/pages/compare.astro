@@ -1,0 +1,279 @@
+---
+import Page from "../layouts/page.astro";
+import Brand from "../components/brand.astro";
+import DataTable from "../components/benchmarks/data-table.astro";
+import {
+  disclosure,
+  faq,
+  fit,
+  intro,
+  lastChecked,
+  limits,
+  outro,
+  picks,
+  table,
+  title,
+  tools,
+  underpressured,
+} from "../components/compare/content";
+import styles from "./compare.module.css";
+
+const appStoreUrl = "https://apps.apple.com/app/underpressured/id6828201625";
+const releasesUrl = "https://github.com/a-dev/underpressured/releases/latest";
+const site = Astro.site!;
+const pageUrl = new URL("/compare/", site).href;
+const description =
+  "ImageOptim, Clop, Zipic, iMazing Converter, Squoosh and more, compared on price, formats, privacy and workflow. Includes when not to use Underpressured.";
+
+const structuredData = {
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      headline: title,
+      description,
+      url: pageUrl,
+      inLanguage: "en",
+      datePublished: lastChecked.iso,
+      dateModified: lastChecked.iso,
+      author: {
+        "@type": "Person",
+        name: "a-dev",
+        url: "https://github.com/a-dev",
+      },
+      publisher: { "@id": new URL("/#website", site).href },
+      about: { "@id": new URL("/#app", site).href },
+      mentions: tools.map((tool) => ({
+        "@type": "Thing",
+        name: tool.name,
+        url: tool.url,
+      })),
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${pageUrl}#faq`,
+      mainEntity: faq.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Underpressured",
+          item: site.href,
+        },
+        { "@type": "ListItem", position: 2, name: "Compare", item: pageUrl },
+      ],
+    },
+  ],
+};
+---
+
+<Page
+  title="ImageOptim alternatives for Mac, compared"
+  description={description}
+  socialTitle={title}
+  socialDescription="Underpressured and ten other Mac image tools side by side: price, formats, privacy, and when to pick one of the others."
+  structuredData={structuredData}
+>
+  <Brand class={styles.brand} />
+
+  <article class={styles.column}>
+    <header class={styles.hero}>
+      <h1 class={styles.title}>{title}</h1>
+      {intro.map((paragraph) => (
+        <p class={styles.intro}>{paragraph}</p>
+      ))}
+      <aside class={styles.disclosure}>
+        <p>{disclosure}</p>
+        <p>
+          Last checked{" "}
+          <time datetime={lastChecked.iso}>{lastChecked.label}</time>. Prices
+          change, so check each site before you buy. If you spot a mistake,{" "}
+          <a class={styles.link} href="/support/">
+            tell me
+          </a>{" "}
+          and I'll fix it.
+        </p>
+      </aside>
+    </header>
+
+    <section class={styles.section} aria-labelledby="short-answer">
+      <h2 id="short-answer" class={styles.sectionTitle}>
+        The short answer
+      </h2>
+      <dl class={styles.picks}>
+        {picks.map((pick) => (
+          <div class={styles.pick}>
+            <dt class={styles.pickNeed}>{pick.need}</dt>
+            <dd class={styles.pickApps}>{pick.apps}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section class={styles.section} aria-labelledby="side-by-side">
+      <h2 id="side-by-side" class={styles.sectionTitle}>
+        Side by side
+      </h2>
+      <DataTable table={table} />
+    </section>
+
+    <section class={styles.section} aria-labelledby="tools">
+      <h2 id="tools" class={styles.sectionTitle}>
+        The apps, one by one
+      </h2>
+      <nav aria-label="Apps on this page">
+        <ul class={styles.toc}>
+          {tools.map((tool) => (
+            <li>
+              <a class={styles.tocLink} href={`#${tool.id}`}>
+                {tool.name}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a class={styles.tocLink} href="#underpressured">
+              Underpressured
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      {tools.map((tool) => (
+        <section class={styles.tool} aria-labelledby={tool.id}>
+          <h3 id={tool.id} class={styles.toolName}>
+            {tool.name}
+          </h3>
+          <p class={styles.toolSummary}>{tool.summary}</p>
+          <div class={styles.verdicts}>
+            <div>
+              <h4 class={styles.verdictTitle}>Good at</h4>
+              <ul class={styles.verdictList}>
+                {tool.good.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 class={styles.verdictTitle}>Keep in mind</h4>
+              <ul class={styles.verdictList}>
+                {tool.mind.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <a class={styles.source} href={tool.url} target="_blank" rel="noopener">
+            {new URL(tool.url).hostname.replace(/^www\./, "")}
+          </a>
+        </section>
+      ))}
+
+      <section
+        class:list={[styles.tool, styles.ours]}
+        aria-labelledby="underpressured"
+      >
+        <h3 id="underpressured" class={styles.toolName}>
+          Underpressured
+        </h3>
+        <p class={styles.toolSummary}>{underpressured.summary}</p>
+        <div class={styles.verdicts}>
+          <div>
+            <h4 class={styles.verdictTitle}>Good at</h4>
+            <ul class={styles.verdictList}>
+              {underpressured.good.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4 class={styles.verdictTitle}>Keep in mind</h4>
+            <ul class={styles.verdictList}>
+              {underpressured.mind.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <a class={styles.source} href="/benchmarks/">
+          Benchmarks: setup, numbers, and limits
+        </a>
+      </section>
+    </section>
+
+    <section class={styles.section} aria-labelledby="fit">
+      <h2 id="fit" class={styles.sectionTitle}>
+        Where Underpressured fits
+      </h2>
+      <p class={styles.prose}>{fit}</p>
+    </section>
+
+    <section class={styles.section} aria-labelledby="limits">
+      <h2 id="limits" class={styles.sectionTitle}>
+        When another app is a better choice
+      </h2>
+      <ul class={styles.limits}>
+        {limits.map((limit) => (
+          <li class={styles.limit}>
+            <strong class={styles.limitWhen}>{limit.when}</strong>{" "}
+            {limit.instead}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class={styles.section} aria-labelledby="questions">
+      <h2 id="questions" class={styles.sectionTitle}>
+        Questions
+      </h2>
+      <div class={styles.faq}>
+        {faq.map((item) => (
+          <div class={styles.faqItem}>
+            <h3 class={styles.faqQuestion}>{item.question}</h3>
+            <p class={styles.faqAnswer}>
+              {item.answer}
+              {item.link && (
+                <>
+                  {" "}
+                  <a class={styles.link} href={item.link.href}>
+                    {item.link.text}
+                  </a>
+                  .
+                </>
+              )}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class={styles.section} aria-labelledby="try">
+      <h2 id="try" class={styles.sectionTitle}>
+        Try it on your own folder
+      </h2>
+      <p class={styles.prose}>{outro}</p>
+      <p class={styles.prose}>
+        Get Underpressured from the{" "}
+        <a class={styles.link} href={appStoreUrl} target="_blank" rel="noopener">
+          Mac App Store
+        </a>{" "}
+        or{" "}
+        <a class={styles.link} href={releasesUrl} target="_blank" rel="noopener">
+          GitHub releases
+        </a>
+        . If it doesn't fit your work, I hope this page helped you find the app
+        that does.
+      </p>
+    </section>
+
+    <a class={styles.back} href="/">
+      &larr; Back to Underpressured overview
+    </a>
+  </article>
+</Page>

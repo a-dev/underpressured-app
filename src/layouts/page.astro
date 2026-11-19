@@ -21,6 +21,7 @@ interface Props {
     processorRequirements: string;
     installUrl: string;
   };
+  structuredData?: Record<string, unknown>;
 }
 
 const {
@@ -33,6 +34,7 @@ const {
   type = "website",
   indexable = true,
   softwareApplication,
+  structuredData,
 } = Astro.props;
 const site = Astro.site;
 if (!site) throw new Error("Set `site` in astro.config.mjs to generate canonical URLs.");
@@ -70,6 +72,9 @@ const applicationJsonLd = softwareApplication
       ],
     }).replace(/</g, "\\u003c")
   : undefined;
+const pageJsonLd = structuredData
+  ? JSON.stringify({ "@context": "https://schema.org", ...structuredData }).replace(/</g, "\\u003c")
+  : undefined;
 ---
 
 <html lang="en">
@@ -83,6 +88,7 @@ const applicationJsonLd = softwareApplication
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#462e54" />
     {applicationJsonLd && <script type="application/ld+json" set:html={applicationJsonLd} />}
+    {pageJsonLd && <script type="application/ld+json" set:html={pageJsonLd} />}
     <meta name="description" content={description} />
     {indexable && <link rel="canonical" href={canonical} />}
     {!indexable && <meta name="robots" content="noindex, follow" />}
