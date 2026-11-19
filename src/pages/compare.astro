@@ -21,7 +21,7 @@ import styles from "./compare.module.css";
 const appStoreUrl = "https://apps.apple.com/app/underpressured/id6828201625";
 const releasesUrl = "https://github.com/a-dev/underpressured/releases/latest";
 const site = Astro.site!;
-const pageUrl = new URL("/compare/", site).href;
+const pageUrl = new URL("/compare", site).href;
 const description =
   "ImageOptim, Clop, Zipic, iMazing Converter, Squoosh and more, compared on price, formats, privacy and workflow. Includes when not to use Underpressured.";
 
@@ -95,7 +95,7 @@ const structuredData = {
           Last checked{" "}
           <time datetime={lastChecked.iso}>{lastChecked.label}</time>. Prices
           change, so check each site before you buy. If you spot a mistake,{" "}
-          <a class={styles.link} href="/support/">
+          <a class={styles.link} href="/support">
             tell me
           </a>{" "}
           and I'll fix it.
@@ -201,7 +201,7 @@ const structuredData = {
             </ul>
           </div>
         </div>
-        <a class={styles.source} href="/benchmarks/">
+        <a class={styles.source} href="/benchmarks">
           Benchmarks: setup, numbers, and limits
         </a>
       </section>

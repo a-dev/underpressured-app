@@ -384,7 +384,7 @@ export const faq: readonly Faq[] = [
     question: "Does Underpressured compress better than other apps?",
     answer:
       "It depends on the images and the settings. My benchmarks compare Underpressured's encoders with Apple's encoder and with pngquant. I haven't run a like-for-like test against other apps yet, so I don't claim that.",
-    link: { text: "Read the benchmarks", href: "/benchmarks/" },
+    link: { text: "Read the benchmarks", href: "/benchmarks" },
   },
   {
     question: "Can I compress images on a Mac without installing anything?",
