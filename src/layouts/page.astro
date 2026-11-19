@@ -39,8 +39,11 @@ const {
 const site = Astro.site;
 if (!site) throw new Error("Set `site` in astro.config.mjs to generate canonical URLs.");
 
-const pagePath = Astro.url.pathname.replace(/\/{2,}/g, "/");
-const normalizedPath = pagePath === "/" ? "/" : `${pagePath.replace(/\/$/, "")}/`;
+const normalizedPath =
+  Astro.url.pathname
+    .replace(/\/{2,}/g, "/")
+    .replace(/(index)?\.html$/, "")
+    .replace(/(.)\/$/, "$1") || "/";
 const canonical = new URL(normalizedPath, site);
 const absoluteSocialImage = new URL(socialImage, site);
 const applicationJsonLd = softwareApplication

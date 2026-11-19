@@ -22,7 +22,8 @@ export default defineConfig({
   ],
   output: "static",
   site: "https://underpressured.app",
-  trailingSlash: "always",
+  trailingSlash: "never",
+  build: { format: "file" },
   vite: {
     ...sharedViteConfig,
     plugins: [
